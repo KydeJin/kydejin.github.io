@@ -1,6 +1,6 @@
 baseURL: "https://kydejin.github.io/"
 title: Kyde Jin
-theme: ["./PaperModel"]
+theme: ["./PaperMode"]
 
 # 语言设置
 languageCode: "zh-cn"
