@@ -1,6 +1,6 @@
-baseURL: "https://kydejin.github.io/"
+baseURL: "https://kydejin.com"
 title: Kyde Jin
-theme: ["/PaperMod"]
+theme: ["PaperMod"]
 
 # 语言设置
 languageCode: "zh-cn"
