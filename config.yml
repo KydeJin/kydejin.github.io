@@ -56,4 +56,5 @@ markup:
     renderer:
       unsafe: true
       
-ignoreLogs = ['warning-partial-superfluous-prefix']
+ignoreLogs:
+  - warning-partial-superfluous-prefix
