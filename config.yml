@@ -2,6 +2,9 @@ baseURL: "https://kydejin.com"
 title: Kyde Jin
 theme: PaperMod
 
+ignoreLogs:
+  - warning-partial-superfluous-prefix
+
 # 菜单配置 (右上角导航)
 menu:
   main:
