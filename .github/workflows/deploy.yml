@@ -18,7 +18,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive # 自动帮你拉取你刚配置的 Git Submodule 主题
+          submodules: 'recursive' # 自动帮你拉取你刚配置的 Git Submodule 主题
           fetch-depth: 0
 
       - name: Setup Hugo
