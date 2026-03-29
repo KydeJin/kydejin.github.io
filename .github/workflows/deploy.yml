@@ -26,7 +26,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest' # 总是使用最新的 Hugo 版本
+          hugo-version: '0.157.0' # 总是使用最新的 Hugo 版本
           extended: true         # 必须开启，因为酷炫主题通常需要 Extended 版本
 
       - name: Build
