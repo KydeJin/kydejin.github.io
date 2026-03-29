@@ -1,35 +1,47 @@
-name: Deploy Hugo Site
+# 这个文件的名字可以随便起，但必须放在 .github/workflows/ 目录下
+name: Deploy Hugo site to Pages
 
-# 这里定义了触发条件：只有当 Pull Request 合并到 main 分支时才运行
 on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed  # 监听 PR 关闭事件
+  push:
+    branches: ["main"] # 只要你向 main 分支推送代码，机器人就开工
+  workflow_dispatch:   # 允许你在 Actions 页面手动点击运行
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy:
-    # 这里加了一个判断：只有当 PR 是“合并”而不是“关闭”时才执行
-    if: github.event.pull_request.merged == true
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          submodules: true  # 必须开启，否则无法下载主题
+          submodules: recursive # 自动帮你拉取你刚配置的 Git Submodule 主题
           fetch-depth: 0
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
-          extended: true
+          hugo-version: 'latest' # 总是使用最新的 Hugo 版本
+          extended: true         # 必须开启，因为酷炫主题通常需要 Extended 版本
 
       - name: Build
-        run: hugo --minify
+        run: hugo --minify      # 让 Hugo 开始构建你的网站，并压缩文件
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          path: ./public         # 告诉机器人：构建好的网页就在 public 文件夹里
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # 正式发布到互联网
