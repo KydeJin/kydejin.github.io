@@ -1,0 +1,94 @@
+
+
+baseURL = "https://kydejin.com/" # 如果有自定义域名，请修改此处
+languageCode = "zh-cn"
+title = "Kyde Jin"
+theme = "blowfish"
+
+# 分页设置：每页显示 10 篇文章
+paginate = 10
+
+# ------------------------------------------
+# 核心参数配置
+# ------------------------------------------
+[params]
+    # 强制开启深色模式（深蓝/深灰），这是科技感的灵魂
+    defaultAppearance = "dark"
+    # 启用页面过渡动画
+    enablePostTransitions = true
+    
+    # 智能搜索配置 (Ctrl + K 唤起)
+    [params.search]
+        enable = true
+        showShortcut = true
+        layout = "stacked"
+
+    # --- 首页：数字仪表盘模式 ---
+    [params.homepage]
+        layout = "background"      # 背景大图模式，极具冲击力
+        showDescription = true
+        showAvatar = true
+        showRecent = true          # 显示最近更新
+        showRecentItems = 3        # 最近文章数量
+        cardView = true            # 开启卡片视图
+
+    # 首页大图：建议选一张科技感、电路或星空的图
+    [params.homepage.image]
+        src = "https://images.unsplash.com/photo-1451187580459-43490279c0fa" 
+        filter = "brightness-40"   # 压暗背景，突出文字
+
+    # --- 文章页：智能增强 ---
+    [params.article]
+        showReadingTime = true     # 显示阅读时间
+        showWordCount = true       # 显示字数
+        showTableOfContents = true # 侧边自动生成目录
+        showTaxonomies = true      # 显示标签/分类
+        showAuthor = true
+        # 开启代码块一键复制
+        showCodeCopyButtons = true
+
+    # --- 极客功能：图表与数学 ---
+    [params.mermaid]
+        enable = true              # 开启流程图支持
+        theme = "dark"
+    [params.math]
+        enable = true              # 开启 LaTeX 数学公式支持
+
+    # --- 社交链接：霓虹风格图标 ---
+    [[params.social]]
+        name = "github"
+        url = "https://github.com/KydeJin" # 确认你的用户名
+    [[params.social]]
+        name = "terminal"
+        url = "/posts"
+    [[params.social]]
+        name = "email"
+        url = "mailto:your-email@example.com"
+
+# ------------------------------------------
+# 导航菜单配置
+# ------------------------------------------
+[[menu.main]]
+    name = "数据归档"
+    url = "/posts/"
+    weight = 10
+[[menu.main]]
+    name = "思维标签"
+    url = "/tags/"
+    weight = 20
+[[menu.main]]
+    name = "系统检索"
+    url = "/search/"
+    weight = 30
+
+# ------------------------------------------
+# 性能优化与安全
+# ------------------------------------------
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true # 允许在 Markdown 中使用简单的 HTML
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    style = "dracula" # 使用经典的德古拉暗色高亮
